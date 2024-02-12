@@ -365,8 +365,12 @@ function calculateBalance(arr) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
+function createChunks(arr, chunkSize) {
+  const parts = Math.ceil(arr.length / chunkSize);
+  const arrRes = Array.from({ length: parts }, (v, i) =>
+    arr.slice(i * chunkSize, i * chunkSize + chunkSize)
+  );
+  return arrRes;
 }
 
 /**
@@ -591,8 +595,16 @@ function propagateItemsByPositionIndex(arr) {
  *    shiftArray(['a', 'b', 'c', 'd'], -1) => ['b', 'c', 'd', 'a']
  *    shiftArray([10, 20, 30, 40, 50], -3) => [40, 50, 10, 20, 30]
  */
-function shiftArray(/* arr, n */) {
-  throw new Error('Not implemented');
+function shiftArray(arr, n) {
+  let result;
+  if (n > 0) {
+    const r = arr.splice(-n, n);
+    result = r.concat(arr);
+  } else {
+    const r = arr.splice(0, -n);
+    result = arr.concat(r);
+  }
+  return result;
 }
 
 /**
